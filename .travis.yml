@@ -2,7 +2,7 @@
 language: python
 # running python 3.6 version
 python:
-  - "3.6"
+  - "3.7"
 
 # Make the docker service available
 services:
