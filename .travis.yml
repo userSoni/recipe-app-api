@@ -9,7 +9,7 @@ services:
   -docker
 
 # It's use pip to install docker compose
-before_scripts: pip install docker-compose
+before_script: pip install docker-compose
 
 # It will run the scripts. If there is any error, that will send us failure notification
 script:
