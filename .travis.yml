@@ -13,4 +13,4 @@ before_scripts: pip install docker-compose
 
 # It will run the scripts. If there is any error, that will send us failure notification
 script:
-  - docker-compose run app sh -c "python manage.py && flake8"
+  - docker-compose run app sh -c "python manage.py test && flake8"
