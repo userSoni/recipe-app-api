@@ -1,0 +1,13 @@
+# This is yml file that will contains the configuration of all services
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app # instead of ./app:/app, I use .:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
