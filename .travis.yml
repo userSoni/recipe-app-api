@@ -1,0 +1,16 @@
+# Every time we are gonna push to git, it's gonna spinup with python server
+language: python
+# running python 3.6 version
+python:
+  - "3.6"
+
+# Make the docker service available
+services:
+  -docker
+
+# It's use pip to install docker compose
+before_scripts: pip install docker-compose
+
+# It will run the scripts. If there is any error, that will send us failure notification
+script:
+  - docker-compose run app sh -c "python manage.py && flake8"
