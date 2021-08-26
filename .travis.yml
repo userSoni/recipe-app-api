@@ -6,11 +6,11 @@ python:
 
 # Make the docker service available
 services:
-  -docker
+  - docker
 
 # It's use pip to install docker compose
 before_script: pip install docker-compose
 
 # It will run the scripts. If there is any error, that will send us failure notification
 script:
-  - docker-compose run app sh -c "python manage.py test && flake8"
+  - docker-compose run -rm sh -c "python manage.py test && flake8"
