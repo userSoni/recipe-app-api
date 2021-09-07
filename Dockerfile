@@ -8,9 +8,9 @@ ENV PYTHONUNBUFFERED 1
 
 # Dependencise - which will copy json directory of a dockerfile and copy all the docker image
 COPY ./requirements.txt /requirements.txt
-RUN apk add --update --no-cache postgresql-client
+RUN apk add --update --no-cache postgresql-client jpeg-dev
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
-      gcc libc-dev linux-headers postgresql-dev
+      gcc libc-dev linux-headers postgresql-dev musl-dev zlib zlib-dev
 # it will copy the docker image requirements.txt and store into the pip
 RUN pip install -r /requirements.txt
 RUN apk del .tmp-build-deps
@@ -23,8 +23,12 @@ WORKDIR /app
 # this will allow to copy the app folder from the local machine to docker image
 COPY ./app /app
 
+RUN mkdir -p /vol/web/media
+RUN mkdir -p /vol/web/static
 # it will create a user, -D allows us to running application only
 RUN adduser -D user
+RUN chown -R user:user /vol/
+RUN chmod -R 755 /vol/web
 # This user switches docker to the user we created
 USER user
 # We've created a seperate user for the security purpose, to protect our docker image
